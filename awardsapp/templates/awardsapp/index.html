@@ -2,8 +2,9 @@
 {% load static %}
 
 {% block styles %}
-  <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/index_styles.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/navbar_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/index_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/navbar_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/grid_item_styles.css' %}">
 {% endblock %}
 
 {% block navbar %}
@@ -11,5 +12,19 @@
 {% endblock %}
 
 {% block content %}
-  <p>The content</p>
+    <div class="main_container">
+        <form method="GET" action="">
+            <!-- We don't need a csrf token since this is a get req -->
+            <input class="search_field" name="q" type="text" placeholder="Search...">
+        </form>
+        <div class="index_container">
+
+            <div class="results">
+                {% for gallery_item in my_range %}
+                    {% include 'awardsapp/includes/grid_item.html' %}
+                {% endfor %}
+            </div>
+      </div>
+    </div>
+
 {% endblock %}
