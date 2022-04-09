@@ -1,0 +1,15 @@
+{% extends 'awardsapp/base/base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/index_styles.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/navbar_styles.css' %}">
+{% endblock %}
+
+{% block navbar %}
+  {% include 'awardsapp/includes/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+  <p>The content</p>
+{% endblock %}
