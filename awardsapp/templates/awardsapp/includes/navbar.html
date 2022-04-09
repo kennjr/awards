@@ -1,0 +1,14 @@
+<div class="navbar_container">
+    <div class="nav_left_opts">
+        <img src="/static/awardsapp/images/ic_logo.svg" class="nav_logo" onclick="window.location.href='{% url 'index' %}'" alt="Navigate back to home">
+        <p id="nav_title">Awards</p>
+    </div>
+    <div class="nav_right_opts">
+        <button type="button" class="nav_btn">Post</button>
+        {% if is_logged_in %}
+            <button type="button" class="nav_btn">{{ user.username }}</button>
+        {% else %}
+            <button type="button" class="nav_btn">Login</button>
+        {% endif %}
+    </div>
+</div>
