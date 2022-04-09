@@ -1,0 +1,22 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="meetup.meet.models.Meetup.objects" />
+          <option value="el_galleria.models.Location.objects" />
+          <option value="el_galleria.models.Category.objects" />
+          <option value="el_galleria.models.Galleria.objects" />
+          <option value="el_galleria.models.Galleria.id" />
+          <option value="base.models.Room.objects" />
+          <option value="insta.models.User.objects" />
+          <option value="insta.models.Profile.objects" />
+          <option value="insta.models.Post.objects" />
+          <option value="insta.models.LocalUser.objects" />
+          <option value="insta.models.Profile.bojects" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
