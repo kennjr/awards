@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+        <title>{{title}}</title>
+    {% else %}
+        <title>Awards</title>
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'awardsapp/styles/base_styles.css' %}">
+    {% block styles %}
+
+    {% endblock %}
+</head>
+<body>
+
+    {% block navbar %}
+
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+</html>
