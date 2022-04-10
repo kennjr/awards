@@ -1,0 +1,50 @@
+{% extends 'awardsapp/base/base.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/index_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/navbar_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/review_styles.css' %}">
+    <script src="{% static 'awardsapp/scripts/review_script.js' %}"></script>
+{% endblock %}
+
+{% block navbar %}
+  {% include 'awardsapp/includes/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="review_container">
+        <div class="project_info_container">
+            <p id="project_name">The Project name</p>
+            <p id="project_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisis gravida neque convallis a cras semper auctor. Sit amet justo donec enim diam vulputate ut. Eget duis at tellus at urna. Dui sapien eget mi proin sed libero enim. Fermentum odio eu feugiat pretium nibh ipsum. Sit amet luctus venenatis lectus. Porta non pulvinar neque laoreet suspendisse interdum consectetur libero.</p>
+            <div class="project_creator_and_date">
+                <!--todo add a href to the @project_creator-->
+                <p id="project_creator">By <a>A Human</a></p>
+                <p id="project_upload_date">12th Mar 2020</p>
+            </div>
+        </div>
+        <div class="project_review_form_container">
+            <div class="review_form_card">
+                <!-- todo change the GET to a POST -->
+                <form method="GET" action="">
+                    <div class="review_input_container">
+                        <label for="design">Design: </label>
+                        <p id="design_txt"></p>
+                    </div>
+                    <input oninput="update_design_seek(this.value)" type="range" name="design" min="1" max="10" value="5" step="1" class="slider" id="design">
+                    <div class="review_input_container">
+                        <label for="usability">Usability: </label>
+                        <p id="usability_txt"></p>
+                    </div>
+                    <input oninput="update_usability_seek(this.value)" type="range" name="usability" min="1" max="10" value="5" step="1" class="slider" id="usability">
+                    <div class="review_input_container">
+                        <label for="content">Content: </label>
+                        <p id="content_txt"></p>
+                    </div>
+                    <input oninput="update_content_seek(this.value)" type="range" name="content" min="1" max="10" value="5" step="1" class="slider" id="content">
+                    <button class="nav_btn" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
