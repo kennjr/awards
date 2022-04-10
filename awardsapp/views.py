@@ -88,3 +88,10 @@ def index(request):
     context = {"title": 'Placeholder', 'is_logged_in': request.user, "my_range": my_range}
     return render(request, 'awardsapp/index.html', context)
 
+
+def profile_page(request, uid):
+    my_range = range(0, 9)
+    # todo Make a search request for a user with the specified uid
+    context = {'title': "A profile", "my_range": my_range}
+    return render(request, 'awardsapp/profile.html', context)
+
