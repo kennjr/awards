@@ -1,0 +1,74 @@
+{% extends 'awardsapp/base/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if title %}
+      {{title}}
+    {% else %}
+      Instagram
+    {% endif %}
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'awardsapp/styles/login_register_styles.css' %}">
+{% endblock %}
+
+{% block navbar %}
+
+{% endblock %}
+
+{% block content %}
+    {% if auth_req == 'register' %}
+        <div class="auth_form_container">
+            <div class="main_form_card">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message_container">
+                            <p>{{message}}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="app_logo_container">
+                    <img src="/static/awardsapp/images/ic_logo.svg" alt="Application logo">
+                    <p>Awards</p>
+                </div>
+                <form method="POST" action="{% url 'register_page' %}">
+                    {% csrf_token %}
+                    <input type="email" placeholder="Email" name="email_field">
+                    <input type="text" placeholder="Name" name="name_field">
+                    <input type="text" placeholder="Username" name="username_field">
+                    <input type="password" placeholder="Password" name="password_field">
+                    <button type="submit">Sign up</button>
+                </form>
+            </div>
+            <div class="minor_form_card">
+                <p>Have an account? <a href="{% url 'login_page' %}">Log in</a></p>
+            </div>
+        </div>
+    {% else %}
+        <div class="auth_form_container">
+            <div class="main_form_card">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message_container">
+                            <p>{{message}}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="app_logo_container">
+                    <img src="/static/awardsapp/images/ic_logo.svg" alt="Application logo">
+                    <p>Awards</p>
+                </div>
+                <form method="POST" action="{% url 'login_page' %}">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Username" name="identifier_field" required>
+                    <input type="password" placeholder="Password" name="password_field" required>
+                    <button type="submit">Log in</button>
+                </form>
+            </div>
+            <div class="minor_form_card">
+                <p>Don't have an account? <a href="{% url 'register_page' %}">Sign Up</a></p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
