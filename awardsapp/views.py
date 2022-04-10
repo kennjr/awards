@@ -95,3 +95,7 @@ def profile_page(request, uid):
     context = {'title': "A profile", "my_range": my_range}
     return render(request, 'awardsapp/profile.html', context)
 
+
+def review_page(request, pid):
+    context = {'title': "Review page"}
+    return render(request, 'awardsapp/review_page.html', context)
