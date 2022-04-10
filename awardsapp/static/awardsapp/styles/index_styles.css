@@ -8,7 +8,6 @@
     align-self: center;
     justify-self: center;
     padding-top: 2.5vh;
-    padding-bottom: 5vh;
 }
 
 .results {
@@ -18,9 +17,15 @@
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 1fr;
     width: 100%;
-    margin: 0 auto;
+    margin: auto auto;
     align-items: center;
     justify-content: center;
+}
+
+.results:after {
+    grid-column: span 2;
+    content:"";
+    height: 1em;
 }
 
 .main_container{
@@ -44,4 +49,10 @@ input{
 
 input:focus{
     background-color: #fff;
+}
+
+.bottom_space{
+    width: 100%;
+    padding: 2vh 0;
+    text-align: center;
 }
