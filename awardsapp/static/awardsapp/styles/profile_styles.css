@@ -1,0 +1,35 @@
+.user_profile_info_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2vh;
+}
+
+#profile_photo{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1.5vh;
+}
+
+#profile_name{
+    font-size: 18px;
+    color: #000;
+    text-align: center;
+}
+
+#profile_email{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #8c8c8c;
+    font-size: 15px;
+    text-align: center;
+}
+
+#profile_bio{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2vh 20%;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

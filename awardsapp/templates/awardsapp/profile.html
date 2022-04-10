@@ -1,0 +1,35 @@
+{% extends 'awardsapp/base/base.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/index_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/navbar_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/profile_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/grid_item_styles.css' %}">
+{% endblock %}
+
+{% block navbar %}
+  {% include 'awardsapp/includes/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="main_container">
+        <div class="user_profile_info_container">
+            <img id="profile_photo" src="https://hdwpro.com/wp-content/uploads/2019/01/Digital-Cool-Wallpaper.png" alt="User's profile photo">
+            <p id="profile_name">{{ user.first_name }}</p>
+            <p id="profile_email">{{ user.email }}</p>
+            <p id="profile_bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisis gravida neque convallis a cras semper auctor. Sit amet justo donec enim diam vulputate ut. Eget duis at tellus at urna. Dui sapien eget mi proin sed libero enim. Fermentum odio eu feugiat pretium nibh ipsum.</p>
+        </div>
+        <div class="index_container">
+            <div class="results">
+                {% for gallery_item in my_range %}
+                    {% include 'awardsapp/includes/grid_item.html' %}
+                {% endfor %}
+            </div>
+            <div class="bottom_space">
+                    <p>--END--</p>
+            </div>
+      </div>
+    </div>
+
+{% endblock %}
