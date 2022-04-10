@@ -5,10 +5,10 @@
     </div>
     <div class="nav_right_opts">
         <button type="button" class="nav_btn">Post</button>
-        {% if is_logged_in %}
+        {% if request.user.is_authenticated %}
             <button type="button" class="nav_btn">{{ user.username }}</button>
         {% else %}
-            <button type="button" class="nav_btn">Login</button>
+            <button type="button" class="nav_btn" onclick="window.location.href='{% url 'login_page' %}'">Login</button>
         {% endif %}
     </div>
 </div>
