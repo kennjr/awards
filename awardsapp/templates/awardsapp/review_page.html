@@ -26,7 +26,8 @@
         <div class="project_review_form_container">
             <div class="review_form_card">
                 <!-- todo change the GET to a POST -->
-                <form method="GET" action="">
+                <form method="POST" action="">
+                    {% csrf_token %}
                     <div class="review_input_container">
                         <label for="design">Design: </label>
                         <p id="design_txt"></p>
