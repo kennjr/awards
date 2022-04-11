@@ -1,0 +1,39 @@
+{% extends 'awardsapp/base/base.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/view_project_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/navbar_styles.css' %}">
+{% endblock %}
+
+{% block navbar %}
+  {% include 'awardsapp/includes/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="main_container">
+        <img src="{{ project.screenshot_1.url }}" alt="An image of the project">
+        <div class="details_container">
+            <div class="ratings_container">
+                <div class="single_rating_container">
+                    <p class="rating_val">0</p>
+                    <p>Design</p>
+                </div>
+                <div class="single_rating_container">
+                    <p class="rating_val">0</p>
+                    <p>Content</p>
+                </div>
+                <div class="single_rating_container">
+                    <p class="rating_val">0</p>
+                    <p>Usability</p>
+                </div>
+            </div>
+            <div class="screenshots_container">
+                <h3>Screenshots</h3>
+                <img class="screenshot_img" src="{{ project.screenshot_2.url }}" alt="Screenshot of the project">
+                <img class="screenshot_img" src="{{ project.screenshot_3.url }}" alt="Screenshot of the project">
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
