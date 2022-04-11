@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.checks import messages
 from django.shortcuts import render, redirect
 
-from awardsapp.models import Profile
+from awardsapp.models import Profile, Project
 
 
 @login_required(login_url='/login')
@@ -84,18 +84,53 @@ def register_page(request):
 
 # Create your views here.
 def index(request):
-    my_range = range(0, 9)
-    context = {"title": 'Placeholder', 'is_logged_in': request.user, "my_range": my_range}
+    projects = Project.objects.all()
+    context = {"title": 'Placeholder', 'is_logged_in': request.user, "projects": projects}
     return render(request, 'awardsapp/index.html', context)
 
 
 def profile_page(request, uid):
-    my_range = range(0, 9)
+    projects = Project.objects.filter(creator__id=uid).all()
+    profile_info = Profile.objects.filter(user__id=uid).first()
     # todo Make a search request for a user with the specified uid
-    context = {'title': "A profile", "my_range": my_range}
+    context = {'title': "A profile", "projects": projects, 'profile_info': profile_info}
     return render(request, 'awardsapp/profile.html', context)
 
 
 def review_page(request, pid):
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        design = request.POST.get('design')
+        usability = request.POST.get('usability')
+
+        print(f'The review Content -{content}, Design -{design}, Usability -{usability}')
+
     context = {'title': "Review page"}
     return render(request, 'awardsapp/review_page.html', context)
+
+
+def new_project(request):
+    from .forms import ProjectForm
+    if request.method == "POST":
+        # We're creating an instance of the form with the data from the post req
+        form = ProjectForm(request.POST,request.FILES)
+        form.instance.creator = request.user
+        print(f"The form is {form}")
+        if form.is_valid():
+            save_form_and_redirect(form, '/')
+    form = ProjectForm()
+    context = {'title': "Placeholder", "form": form}
+    return render(request, 'awardsapp/new_project.html', context)
+
+
+def view_project_page(request, pid):
+    project = Project.objects.filter(id=pid).all()
+    context = {'title': "Placeholder", 'project': project, 'is_project_view': True}
+    return render(request, 'awardsapp/view_project_page.html', context)
+
+
+def save_form_and_redirect(form, redirect_destination):
+    form.save()
+    # We're passing the name, that we created in the urls.py of the app, of the url
+    return redirect(str(redirect_destination))
+
