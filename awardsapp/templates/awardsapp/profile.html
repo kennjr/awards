@@ -18,16 +18,25 @@
             <img id="profile_photo" src="https://hdwpro.com/wp-content/uploads/2019/01/Digital-Cool-Wallpaper.png" alt="User's profile photo">
             <p id="profile_name">{{ user.first_name }}</p>
             <p id="profile_email">{{ user.email }}</p>
-            <p id="profile_bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisis gravida neque convallis a cras semper auctor. Sit amet justo donec enim diam vulputate ut. Eget duis at tellus at urna. Dui sapien eget mi proin sed libero enim. Fermentum odio eu feugiat pretium nibh ipsum.</p>
+            {% if profile_info.bio %}
+                <p class="profile_bio">{{ profile_info.bio }}</p>
+            {% else %}
+                <p class="profile_bio">No bio</p>
+            {% endif %}
+
         </div>
         <div class="index_container">
             <div class="results">
-                {% for gallery_item in my_range %}
-                    {% include 'awardsapp/includes/grid_item.html' %}
+                {% for project_item in projects %}
+                    {% include 'awardsapp/includes/grid_item.html' with project=project_item %}
                 {% endfor %}
             </div>
             <div class="bottom_space">
+                {% if projects %}
                     <p>--END--</p>
+                {% else %}
+                    <p>No projects yet.</p>
+                {% endif %}
             </div>
       </div>
     </div>
