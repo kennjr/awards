@@ -1,16 +1,16 @@
-<div class="grid_item_container">
-    <div class="grid_item_img_container">
-        <img class="galleria_item_img" src='https://hdwpro.com/wp-content/uploads/2019/01/Digital-Cool-Wallpaper.png' alt="Grid img" onclick="">
+<div class="grid_item_container" onclick="window.location.href'{% url 'view_project_page' project.id %}'">
+    <div class="grid_item_img_container" >
+        <img class="galleria_item_img" src='{{project.screenshot_1.url}}' alt="Grid img" >
     </div>
     <div class="grid_item_info">
-        <p class="project_name_txt">The name of the project</p>
+        <p class="project_name_txt">{{ project.name }}</p>
         <div class="grid_item_project_info_container">
-            <p class="creator_origin_txt">From Nairobi</p>
-            <p class="upload_date_txt">5th May 2020</p>
+            <p class="creator_origin_txt">From Earth</p>
+            <p class="upload_date_txt">{{ project.created }}</p>
         </div>
         <div class="divider"></div>
         <div>
-            <p class="creator_name_txt">By <strong>A Human</strong></p>
+            <p onclick="window.location.href='{% url 'profile_page' project.creator.id %}'" class="creator_name_txt">By <strong>{{project.creator.username}}</strong></p>
         </div>
     </div>
 </div>
