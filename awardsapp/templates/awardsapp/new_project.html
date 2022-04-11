@@ -1,0 +1,43 @@
+{% extends 'awardsapp/base/base.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/index_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/navbar_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/new_project_styles.css' %}">
+{% endblock %}
+
+{% block navbar %}
+  {% include 'awardsapp/includes/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="project_form_container">
+        <p>New Project</p>
+        <div class="review_form_card">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.name }}
+                </div>
+                <div class="form-group">
+                    {{ form.description }}
+                </div>
+                <div class="form-group">
+                    {{ form.tags }}
+                </div>
+                <div class="form-group">
+                    {{ form.screenshot_1 }}
+                </div>
+                <div class="form-group">
+                    {{ form.screenshot_2 }}
+                </div>
+                <div class="form-group">
+                    {{ form.screenshot_3 }}
+                </div>
+                <button class="nav_btn" type="submit">Post</button>
+            </form>
+    </div>
+    </div>
+
+{% endblock %}
