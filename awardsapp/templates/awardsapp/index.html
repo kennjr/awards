@@ -20,8 +20,8 @@
         <div class="index_container">
 
             <div class="results">
-                {% for gallery_item in my_range %}
-                    {% include 'awardsapp/includes/grid_item.html' %}
+                {% for project_item in projects %}
+                    {% include 'awardsapp/includes/grid_item.html' with project=project_item %}
                 {% endfor %}
             </div>
       </div>
