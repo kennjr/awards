@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
@@ -35,3 +36,19 @@ class Profile(models.Model):
     def search_profile_by_website(cls, website):
         search_results = cls.objects.filter(website=website).all()
         return search_results
+
+
+class Project(models.Model):
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=199, blank=False, null=False)
+    description = models.TextField()
+    tags = models.TextField(blank=True)
+    screenshot_1 = CloudinaryField('screenshots')
+    screenshot_2 = CloudinaryField('screenshots')
+    screenshot_3 = CloudinaryField('screenshots')
+
+
+
+
+
+
