@@ -2,9 +2,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.checks import messages
+from django.db.models import Q
 from django.shortcuts import render, redirect
 
-from awardsapp.models import Profile, Project
+from awardsapp.models import Profile, Project, AvgRating, Rating
 
 
 @login_required(login_url='/login')
@@ -90,42 +91,68 @@ def index(request):
 
 
 def profile_page(request, uid):
+    searched_user = User.objects.filter(id=uid).first()
     projects = Project.objects.filter(creator__id=uid).all()
     profile_info = Profile.objects.filter(user__id=uid).first()
     # todo Make a search request for a user with the specified uid
-    context = {'title': "A profile", "projects": projects, 'profile_info': profile_info}
+    context = {'title': "A profile", "projects": projects, 'profile_info': profile_info, 'searched_user': searched_user}
     return render(request, 'awardsapp/profile.html', context)
 
 
 def review_page(request, pid):
-    if request.method == 'POST':
-        content = request.POST.get('content')
-        design = request.POST.get('design')
-        usability = request.POST.get('usability')
+    project = Project.objects.filter(id=pid).first()
+    current_user_rating = Rating.objects.filter(reviewer=request.user, project=project)
 
-        print(f'The review Content -{content}, Design -{design}, Usability -{usability}')
+    if current_user_rating or project.creator == request.user:
+        return redirect(f'/projects/{pid}')
+    else:
+        avg_rating = AvgRating.objects.filter(project__id=pid).first()
 
-    context = {'title': "Review page"}
-    return render(request, 'awardsapp/review_page.html', context)
+        if request.method == 'POST':
+            content = request.POST.get('content')
+            design = request.POST.get('design')
+            usability = request.POST.get('usability')
+
+            new_rating = Rating.objects.create(project=project, design=int(design), content=int(content), usability=int(usability), reviewer=request.user)
+            if new_rating:
+                all_ratings = Rating.objects.filter(project__id=pid).all()
+                designs, contents, usabilities = [rating.design for rating in all_ratings], [rating.content for rating in all_ratings], [rating.usability for rating in all_ratings]
+                new_design_avg, new_content_avg, new_usability_avg = get_avg(designs), get_avg(contents), get_avg(usabilities)
+                if avg_rating:
+                    avg_rating.design = new_design_avg
+                    avg_rating.content = new_content_avg
+                    avg_rating.usability = new_usability_avg
+
+                    avg_rating.save()
+                else:
+                    AvgRating.objects.create(project=project, design=int(new_design_avg), content=int(new_content_avg),
+                                             usability=int(new_usability_avg))
+
+                return redirect(f'/projects/{pid}')
+
+        context = {'title': "Review page", 'project': project, 'avg_rating': avg_rating}
+        return render(request, 'awardsapp/review_page.html', context)
 
 
 def new_project(request):
     from .forms import ProjectForm
     if request.method == "POST":
         # We're creating an instance of the form with the data from the post req
-        form = ProjectForm(request.POST,request.FILES)
+        form = ProjectForm(request.POST, request.FILES)
         form.instance.creator = request.user
-        print(f"The form is {form}")
         if form.is_valid():
-            save_form_and_redirect(form, '/')
+            form.save()
+            return redirect('/')
+
     form = ProjectForm()
     context = {'title': "Placeholder", "form": form}
     return render(request, 'awardsapp/new_project.html', context)
 
 
 def view_project_page(request, pid):
-    project = Project.objects.filter(id=pid).all()
-    context = {'title': "Placeholder", 'project': project, 'is_project_view': True}
+    project = Project.objects.filter(id=pid).first()
+    avg_rating = AvgRating.objects.filter(project__id=pid).first()
+    context = {'title': "Placeholder", 'project': project, 'avg_rating': avg_rating, 'is_project_view': True}
     return render(request, 'awardsapp/view_project_page.html', context)
 
 
@@ -134,3 +161,6 @@ def save_form_and_redirect(form, redirect_destination):
     # We're passing the name, that we created in the urls.py of the app, of the url
     return redirect(str(redirect_destination))
 
+
+def get_avg(all_ratings):
+    return sum(all_ratings)/len(all_ratings)
