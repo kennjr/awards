@@ -11,7 +11,7 @@ The application gives users of tech products an opportunity to give the creators
 * Open the cloned project on your text-editor
 * Run the manage.py file
 
-##Features
+## Features
 - PostgreSql database
 - Fully functioning authentication system
 - Users can post and view projects
