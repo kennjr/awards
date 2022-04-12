@@ -137,3 +137,70 @@ a {
     cursor: pointer;
     scale: 0.95;
 }
+
+/* Styling for the phone */
+@media only screen and (max-width: 640px) {
+    /* Here are some changes*/
+    .review_form_card {
+        width: 100%;
+        margin: 15% auto;
+        overflow: auto;
+        min-height: 50vh;
+    }
+
+    #project_upload_date{
+        font-size: small;
+    }
+
+    .project_info_container{
+        width: 80%;
+    }
+
+    .review_container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        overflow: hidden;
+    }
+}
+
+/* Styling for the phone */
+@media only screen and (min-width: 641px) and (max-width: 880px) {
+    /* Here are some changes*/
+    .review_form_card {
+        width: 100%;
+        margin: 15% auto;
+        overflow: auto;
+        min-height: 50vh;
+    }
+
+    #project_upload_date{
+        font-size: medium;
+    }
+
+    .project_info_container{
+        width: 80%;
+    }
+
+    .review_container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        overflow: hidden;
+    }
+}
+
+/* Styling for the phone */
+@media only screen
+    and (min-width: 881px)
+    and (max-width: 1200px) {
+    /* Here are some changes*/
+    .review_form_card {
+        width: 60%;
+        margin: 7% auto;
+        overflow: auto;
+        min-height: 50vh;
+    }
+}

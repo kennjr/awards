@@ -72,3 +72,28 @@
     height: 1px;
     margin: 0.5vh 0;
 }
+
+/* Styling for the phone */
+@media only screen and (max-width: 640px) {
+    /* Here are some changes*/
+    .details_container{
+        width: 80%;
+        margin-top: 0%;
+        margin-left: 15%;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Styling for the phone */
+@media only screen and (min-width: 641px) and (max-width: 880px) {
+    /* Here are some changes*/
+
+}
+
+/* Styling for the phone */
+@media only screen and (min-width: 881px) and (max-width: 1200px) {
+    /* Here are some changes*/
+
+}

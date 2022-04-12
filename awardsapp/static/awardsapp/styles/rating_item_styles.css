@@ -42,3 +42,36 @@
     font-size: small;
     margin: 0;
 }
+
+/* Styling for the phone */
+@media only screen and (max-width: 640px) {
+    /* Here are some changes*/
+    .rating_val{
+        font-size: medium;
+    }
+    .descriptive_txt{
+        font-size: small;
+    }
+    .rating_submit_time_txt{
+        color: grey;
+        font-size: x-small;
+        margin: 0;
+    }
+}
+
+/* Styling for the phone */
+@media only screen and (min-width: 641px) and (max-width: 880px) {
+    /* Here are some changes*/
+     .rating_val{
+        font-size: medium;
+    }
+    .descriptive_txt{
+        font-size: small;
+    }
+}
+
+/* Styling for the phone */
+@media only screen and (min-width: 881px) and (max-width: 1200px) {
+    /* Here are some changes*/
+
+}

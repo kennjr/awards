@@ -69,6 +69,10 @@ p{
     font-size: var(--small-text-size);
 }
 
+.creator_name_txt{
+    margin-top: 0.5vh;
+}
+
 /* Styling for the phone */
 @media only screen and (max-width: 640px) {
     /* Here are some changes*/
