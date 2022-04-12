@@ -1,0 +1,15 @@
+<div class="reviews_container">
+    {% for rating in all_ratings %}
+
+        {% if forloop.last %}
+            <div>
+                {% include 'awardsapp/includes/rating_item.html' with rating=rating %}
+            </div>
+        {% else %}
+            <div>
+                {% include 'awardsapp/includes/rating_item.html' with rating=rating %}
+            </div>
+            <div class="divider"></div>
+        {% endif %}
+    {% endfor %}
+</div>
