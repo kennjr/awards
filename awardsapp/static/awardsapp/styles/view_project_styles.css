@@ -46,3 +46,14 @@
     margin: 1vh 0;
 }
 
+.description_container{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: 2vh 0;
+}
+
+.description_container > h3,p{
+    margin: 1vh 0;
+}
+
