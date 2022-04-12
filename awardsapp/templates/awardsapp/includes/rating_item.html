@@ -1,0 +1,20 @@
+<div class="review_item_container">
+    <div class="reviewer_info_container">
+        <p class="reviewer_name_txt"><a href="{% url 'profile_page' rating.reviewer.id %}">{{ rating.reviewer.username }}</a></p>
+        <p class="rating_submit_time_txt">{{ rating.created }}</p>
+    </div>
+    <div class="review_item_values">
+        <div class="single_rating_container">
+            <p class="rating_val">{{ rating.design }}</p>
+            <p class="descriptive_txt">Design</p>
+        </div>
+        <div class="single_rating_container">
+            <p class="rating_val">{{ rating.content }}</p>
+            <p class="descriptive_txt">Content</p>
+        </div>
+        <div class="single_rating_container">
+            <p class="rating_val">{{ rating.usability }}</p>
+            <p class="descriptive_txt">Usability</p>
+        </div>
+    </div>
+</div>
