@@ -94,11 +94,15 @@ def profile_page(request, uid):
     searched_user = User.objects.filter(id=uid).first()
     projects = Project.objects.filter(creator__id=uid).all()
     profile_info = Profile.objects.filter(user__id=uid).first()
-    # todo Make a search request for a user with the specified uid
-    context = {'title': "A profile", "projects": projects, 'profile_info': profile_info, 'searched_user': searched_user}
+    is_current_user_profile = False
+    if uid == request.user.id:
+        is_current_user_profile = True
+    context = {'title': "A profile", "projects": projects, 'profile_info': profile_info,
+               'searched_user': searched_user, 'is_current_user_profile': is_current_user_profile}
     return render(request, 'awardsapp/profile.html', context)
 
 
+@login_required(login_url='/login')
 def review_page(request, pid):
     project = Project.objects.filter(id=pid).first()
     current_user_rating = Rating.objects.filter(reviewer=request.user, project=project)
@@ -134,6 +138,7 @@ def review_page(request, pid):
         return render(request, 'awardsapp/review_page.html', context)
 
 
+@login_required(login_url='/login')
 def new_project(request):
     from .forms import ProjectForm
     if request.method == "POST":
@@ -152,8 +157,33 @@ def new_project(request):
 def view_project_page(request, pid):
     project = Project.objects.filter(id=pid).first()
     avg_rating = AvgRating.objects.filter(project__id=pid).first()
-    context = {'title': "Placeholder", 'project': project, 'avg_rating': avg_rating, 'is_project_view': True}
+    all_ratings = Rating.objects.filter(project__id=pid).all()
+    context = {'title': "Placeholder", 'project': project, 'avg_rating': avg_rating, 'all_ratings': all_ratings,
+               'is_project_view': True}
     return render(request, 'awardsapp/view_project_page.html', context)
+
+
+@login_required(login_url='/login')
+def edit_profile_page(request):
+    profile = Profile.objects.filter(user__id=request.user.id).first()
+
+    if request.method == "POST":
+        website = request.POST.get('website_field')
+        name = request.POST.get('name_field')
+        bio = request.POST.get('bio_field')
+
+        if name != request.user.first_name:
+            user = User.objects.filter(username=request.user.username).first()
+            user.first_name = name
+            user.save()
+
+        profile.website = website
+        profile.bio = bio
+        profile.save()
+        return redirect(f'/users/{request.user.id}')
+
+    context = {'title': "Placeholder", 'profile': profile}
+    return render(request, 'awardsapp/edit_profile.html', context)
 
 
 def save_form_and_redirect(form, redirect_destination):
