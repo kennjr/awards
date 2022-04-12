@@ -1,0 +1,32 @@
+{% extends 'awardsapp/base/base.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/index_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/navbar_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/edit_profile_styles.css' %}">
+{% endblock %}
+
+{% block navbar %}
+  {% include 'awardsapp/includes/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="edit_profile_container">
+        <div class="edit_profile_form_container">
+            <div class="main_form_card">
+                <div class="app_logo_container">
+                    <p>Edit Profile</p>
+                </div>
+                <form method="POST" action="{% url 'edit_profile_page' %}">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Name" value="{{profile.user.first_name}}" name="name_field">
+                    <input type="text" placeholder="Bio" value="{{profile.bio}}" name="bio_field">
+                    <input type="text" placeholder="Website" value="{{profile.website}}" name="website_field">
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

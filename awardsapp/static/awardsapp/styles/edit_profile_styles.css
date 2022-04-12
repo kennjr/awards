@@ -1,0 +1,74 @@
+.edit_profile_container {
+    width: 30%;
+    margin: 7% auto;
+    overflow: auto;
+    min-height: 50vh;
+}
+
+.main_form_card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.main_form_card > form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding-bottom: 2vh;
+}
+
+input{
+    padding: 1vh 2vw;
+    background-color: #fff;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: grey;
+    border-style: solid;
+    font-size: medium;
+    margin: 1vh 0;
+}
+
+input:focus{
+    outline: none;
+}
+
+button{
+    width: 100%;
+    padding: 1vh 2vw;
+    background-color: var(--accent-color);
+    outline: none;
+    border-width: 0px;
+    border-radius: 3px;
+    font-size: medium;
+    color: #fff;
+    display: block;
+    margin: 3vh 0;
+}
+
+button:hover{
+    cursor: pointer;
+    scale: 0.95;
+}
+
+.app_logo_container{
+    padding: 3vh 3vw;
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    align-items: center;
+    color: var(--accent-color);
+    justify-content: center;
+}
+
+.app_logo_container > p, img{
+    background-color: #fff;
+    margin: 0 0.25vw;
+}
