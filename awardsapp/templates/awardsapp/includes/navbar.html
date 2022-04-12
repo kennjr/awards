@@ -8,10 +8,15 @@
             <button type="button" class="nav_btn" onclick="window.location.href='{% url 'new_project_page' %}'">Post</button>
         {% endif %}
         {% if is_project_view %}
-            <button type="button" class="nav_btn" onclick="window.location.href='{% url 'profile_page' 1 %}'">Review</button>
+            <button type="button" class="nav_btn" onclick="window.location.href='{% url 'review_page' project.id %}'">Review</button>
         {% endif %}
         {% if request.user.is_authenticated %}
-            <button type="button" class="nav_btn" onclick="window.location.href='{% url 'profile_page' request.user.id %}'">{{ user.username }}</button>
+            {% if not is_current_user_profile and '/edit-profile/' not in request.path %}
+                <button type="button" class="nav_btn" onclick="window.location.href='{% url 'profile_page' request.user.id %}'">{{ user.username }}</button>
+            {% endif %}
+            {% if '/edit-profile/' not in request.path and is_current_user_profile %}
+                <button type="button" class="nav_btn" onclick="window.location.href='{% url 'edit_profile_page' %}'">Edit Profile</button>
+            {% endif %}
         {% else %}
             <button type="button" class="nav_btn" onclick="window.location.href='{% url 'login_page' %}'">Login</button>
         {% endif %}
