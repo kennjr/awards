@@ -4,6 +4,7 @@
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/view_project_styles.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/navbar_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'awardsapp/styles/rating_item_styles.css' %}">
 {% endblock %}
 
 {% block navbar %}
@@ -14,17 +15,17 @@
     <div class="main_container">
         <img src="{{ project.screenshot_1.url }}" alt="An image of the project">
         <div class="details_container">
-            <div class="ratings_container">
+            <div class="avg_rating_container">
                 <div class="single_rating_container">
-                    <p class="rating_val">{% if avg_rating %} {{avg_rating.design}} {% else %} 0 {% endif %}</p>
+                    <p class="avg_rating_val">{% if avg_rating %} {{avg_rating.design}} {% else %} 0 {% endif %}</p>
                     <p>Design</p>
                 </div>
                 <div class="single_rating_container">
-                    <p class="rating_val">{% if avg_rating %} {{avg_rating.content}} {% else %} 0 {% endif %}</p>
+                    <p class="avg_rating_val">{% if avg_rating %} {{avg_rating.content}} {% else %} 0 {% endif %}</p>
                     <p>Content</p>
                 </div>
                 <div class="single_rating_container">
-                    <p class="rating_val">{% if avg_rating %} {{avg_rating.usability}} {% else %} 0 {% endif %}</p>
+                    <p class="avg_rating_val">{% if avg_rating %} {{avg_rating.usability}} {% else %} 0 {% endif %}</p>
                     <p>Usability</p>
                 </div>
             </div>
@@ -36,6 +37,12 @@
                 <h3>Screenshots</h3>
                 <img class="screenshot_img" src="{{ project.screenshot_2.url }}" alt="Screenshot of the project">
                 <img class="screenshot_img" src="{{ project.screenshot_3.url }}" alt="Screenshot of the project">
+            </div>
+            <div class="ratings_container">
+                <h3>Ratings</h3>
+                <div>
+                    {% include 'awardsapp/includes/ratings_container.html' with all_ratings=all_ratings %}
+                </div>
             </div>
         </div>
     </div>
